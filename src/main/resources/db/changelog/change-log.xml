@@ -4,23 +4,30 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet runAlways="true" author="LisunenkoDavid" id="create_schema_utmn" dbms="postgresql">
-        <sql dbms="postgresql">
-            CREATE SCHEMA utmn;
-        </sql>
-        <comment>Создание схемы utmn</comment>
-    </changeSet>
-
-    <changeSet runAlways="true" author="LisunenkoDavid" id="script1" dbms="postgresql">
+    <!-- ChangeSet для создания схемы и таблицы student из script1.sql -->
+    <changeSet runAlways="false" author="LisunenkoDavid" id="create_schema_and_table_from_script1" dbms="postgresql">
         <sqlFile dbms="postgresql"
                  path="scripts/script1.sql"
                  encoding="UTF-8"
-                 endDelimiter="/"
+                 endDelimiter=";"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"
         />
-        <comment>Создание первой таблицы</comment>
+        <comment>Создание схемы utmn и таблицы student из script1.sql</comment>
+    </changeSet>
+
+    <!-- ChangeSet для добавления записи из script2.sql, который будет выполняться при каждом запуске -->
+    <changeSet runAlways="true" author="LisunenkoDavid" id="insert_fio_entry_${now}" dbms="postgresql">
+        <comment>Добавление записи с ФИО в таблицу student (выполняется при каждом запуске)</comment>
+        <sqlFile dbms="postgresql"
+                 path="scripts/script2.sql"
+                 encoding="UTF-8"
+                 endDelimiter=";"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+        />
     </changeSet>
 
 </databaseChangeLog>
