@@ -1,6 +1,6 @@
 CREATE SCHEMA utmn;
 
-CREATE TABLE utmn.student -- Добавлено IF NOT EXISTS для таблицы
+CREATE TABLE utmn.student 
 (
     id                         bigserial                           NOT NULL,
     fio                        varchar(128)                        NOT NULL
